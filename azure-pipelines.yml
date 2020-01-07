@@ -17,7 +17,7 @@ steps:
     dir %TMP%
     dir %TMP%\polaris
     echo Running polaris setup
-    %Build.SourceBranchName%
-    %Build.SourceBranch%
+    echo.%Build.SourceBranchName%
+    echo.%Build.SourceBranch%
     git branch
     %TMP%\polaris\polaris_cli-win64-1.5.5193\bin\polaris configure
