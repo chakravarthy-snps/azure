@@ -30,4 +30,4 @@ steps:
 - script: |
     go run main.go
   workingDirectory: '$(modulePath)'
-- bash: echo SourceBranchName is - $Build.SourceBranchName   
+- bash: echo SourceBranchName is - $BUILD_SOURCEBRANCHNAME   
