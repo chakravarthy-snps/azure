@@ -17,3 +17,4 @@ steps:
     dir %TMP%
     dir %TMP%\polaris
     echo Running polaris setup
+    %TMP%\polaris\polaris_cli-win64-1.5.5193\bin\polaris analyze
