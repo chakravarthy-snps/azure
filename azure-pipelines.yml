@@ -7,13 +7,13 @@ trigger:
 - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-2019'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
 - script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+    echo Downloading Polaris CLI
+    curl -L https://uat01.dev.polaris.synopsys.com/api/tools/polaris_cli-win64.zip --output %TMP%\polaris.zip
+    powershell.exe -NoP -NonI -Command "Expand-Archive '%TMP%\polaris.zip' '%TMP%\polaris'"
+    dir %TMP%
+    dir %TMP%\polaris
+    echo Running polaris setup
