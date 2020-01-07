@@ -9,15 +9,24 @@ trigger:
 pool:
   vmImage: 'windows-2019'
 
+variables:
+  GOBIN:  '$(GOPATH)/bin' # Go binaries path
+  GOROOT: '/usr/local/go1.13' # Go installation path
+  GOPATH: '$(system.defaultWorkingDirectory)/gopath' # Go workspace path
+  modulePath: '$(GOPATH)/src/github.com/$(build.repository.name)' # Path to the module's code
+
 steps:
 - script: |
-    echo Downloading Polaris CLI
-    curl -L https://uat01.dev.polaris.synopsys.com/api/tools/polaris_cli-win64.zip --output %TMP%\polaris.zip
-    powershell.exe -NoP -NonI -Command "Expand-Archive '%TMP%\polaris.zip' '%TMP%\polaris'"
-    dir %TMP%
-    dir %TMP%\polaris
-    echo Running polaris setup
-    echo SourceBranchName is %Build.SourceBranchName%
-    echo SourceBranch is %Build.SourceBranch%
-    git branch
-    %TMP%\polaris\polaris_cli-win64-1.5.5193\bin\polaris configure
+    mkdir -p '$(GOBIN)'
+    mkdir -p '$(GOPATH)/pkg'
+    mkdir -p '$(modulePath)'
+    shopt -s extglob
+    shopt -s dotglob
+    mv !(gopath) '$(modulePath)'
+    echo '##vso[task.prependpath]$(GOBIN)'
+    echo '##vso[task.prependpath]$(GOROOT)/bin'
+  displayName: 'Set up the Go workspace'
+
+- script: |
+    go run main.go
+  workingDirectory: '$(modulePath)'
