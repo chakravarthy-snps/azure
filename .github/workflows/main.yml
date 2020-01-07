@@ -1,0 +1,20 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Azure Pipelines Action
+        uses: Azure/pipelines@v1
+        with:
+          # Fullyqualified URL to the Azure DevOps organization along with project name(eg, https://dev.azure.com/organization/project-name or https://server.example.com:8080/tfs/DefaultCollection/project-name)
+          azure-devops-project-url: 
+            "https://dev.azure.com/chakrava/chakrava/_apis/build/status/chakravarthy-snps.azure"
+          azure-pipeline-name: 
+            "chakravarthy-snps"
+          azure-devops-token: 
+            gk6hty4u22flrsacaz66wssoqd2etrbfl6ddo4brnw5u5t3wvl6q
