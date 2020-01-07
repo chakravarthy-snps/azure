@@ -17,7 +17,6 @@ steps:
     dir %TMP%
     dir %TMP%\polaris
     echo Running polaris setup
-    @echo off
     echo SourceBranchName is %Build.SourceBranchName%
     echo SourceBranch is %Build.SourceBranch%
     git branch
